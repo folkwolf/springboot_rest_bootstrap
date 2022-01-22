@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Моя информация</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-dark navbar-expand-md bg-dark">
+    <div class="container-fluid"><a class="navbar-brand" href="#"
+                                    th:utext="${'Привет, '+#authentication.name+'. Твои права: '+#authentication.authorities}">Привет,
+        юзер</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse"><span
+                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <a class="btn btn-dark" role="button" href="./logout">Выйти</a></div>
+</nav>
+<div class="row">
+    <div class="col" style="max-width: 20%;">
+        <ul class="nav nav-pills flex-column">
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" href="/admin">Админка</a></li>
+            <li class="nav-item"><a class="nav-link active" href="#">Моя инфа</a></li>
+        </ul>
+    </div>
+    <div class="col" style="max-width: 100%;">
+        <div class="container-fluid">
+            <h3 class="text-dark mb-4" style="margin-top: 24px;">Информация обо мне</h3>
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 fw-bold">Обо мне</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive table mt-2" id="dataTable-1" role="grid"
+                         aria-describedby="dataTable_info">
+                        <table class="table table-striped my-0" id="dataTable">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Имя</th>
+                                <th>Фамилия</th>
+                                <th>Логин</th>
+                                <th>Возраст</th>
+                                <th>Права</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:text="${my.id}"></td>
+                                <td th:text="${my.name}"></td>
+                                <td th:text="${my.surname}"></td>
+                                <td th:text="${my.username}"></td>
+                                <td th:text="${my.age}"></td>
+                                <td th:text="${my.roles}"></td>
+                            </tr>
+                            <tr></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./js/bootstrap.bundle.min.js"></script>
+<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/main.js"></script>
+</body>
+
+</html>
